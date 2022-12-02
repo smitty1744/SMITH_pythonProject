@@ -38,7 +38,7 @@ class Shooter:
         self.moving_down  = False
 
     def update(self):
-
+        self.x -= self.settings.shooter_speed * .3
         if self.moving_right:
             self.x += self.settings.shooter_speed # * self.settings.boy_direction)
 

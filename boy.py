@@ -43,6 +43,7 @@ class Boy():
 
     def update(self):
         """Move the boy steadily to the left."""
+        self.x -= self.settings.boy_speed * .3
 
         if self.moving_right:
             #cprint('Boy am moving right.')
@@ -65,7 +66,7 @@ class Boy():
 
     def blitme(self):
 
-        self.health = 20
+        # self.health = 20
         self.image = self.healthy_image
 
         if self.health < 40:

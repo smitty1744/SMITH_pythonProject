@@ -18,9 +18,11 @@ class TrailRunner:
         self.settings = Settings()
         self.screen_width = 1200
         self.screen_height = 800
-        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height), HWSURFACE | DOUBLEBUF | RESIZABLE)
+
+        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.pic = pygame.image.load("images/background.jpg")
-        self.screen.blit(pygame.transform.scale(self.pic, (self.screen_width, self.screen_height)), (0, 0))
+        self.pic = pygame.transform.scale(self.pic, (self.screen_width, self.screen_height))
+        self.i = 0
         pygame.display.flip()
         pygame.display.set_caption('Trail Runner')
 
@@ -39,6 +41,7 @@ class TrailRunner:
             self._update_bullets()
             self.shooter.update()
             self._update_screen()
+            self._check_bullet_boy_collisions()
             se.background_sound.play()
 
     # -----------------------------------------------------------------------------------
@@ -130,6 +133,12 @@ class TrailRunner:
             self.bullets.empty()
         # se.boy_sound.play()
 
+    def _check_shooter_boy_collisions(self):
+        collisions = pygame.Rect.colliderect(
+            self.shooter.rect, self.boy.rect, True, True)
+        if collisions and self.boy.x < self.shooter.x:
+            self.boy.x = self.shooter.x
+
     # -----------------------------------------------------------------------------------
     def _update_boy(self):
         self.boy.update()
@@ -137,7 +146,12 @@ class TrailRunner:
     # -----------------------------------------------------------------------------------
     def _update_screen(self):
         self.screen.fill((0, 0, 0))
-        self.screen.blit(pygame.transform.scale(self.pic, (self.screen_width, self.screen_height)), (0, 0))
+        self.i -= self.boy.settings.boy_speed * .3
+        self.screen.blit(self.pic, (self.i, 0))
+        self.screen.blit(self.pic, (self.screen_width+self.i, 0))
+        if self.i <= -self.screen_width:
+            self.screen.blit(self.pic, (self.screen_width+self.i, 0))
+            self.i = 0
         self.boy.blitme()
         self.shooter.blitme()
         # self.screen.blit(self.settings.boy, (0, 0))
