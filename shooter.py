@@ -25,7 +25,7 @@ class Shooter:
         self.image = pygame.transform.scale(self.image, (150, 150))
         self.rect = self.image.get_rect()
         self.rect.x = 200
-        self.rect.y = 480
+        self.rect.y = 538
         self.health = 100
         self.x = int(self.rect.x)
         self.y = int(self.rect.y)

@@ -18,7 +18,7 @@ class Settings:
         self.shooter_height = 50
         self.shooter_speed = 2
         self.shooter_direction = -1
-        self.bullet_speed = 6.0
+        self.bullet_speed = 2.5
         self.bullet_height = 3
         self.bullet_width = 15
         self.bullet_color = (60, 60, 60)

@@ -13,7 +13,7 @@ class Bullet(Sprite):
 
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width,
                                 self.settings.bullet_height)
-        # Hava Szarafinski adjusted where the bullet spawns from shooter
+        #Hava helped shooter position
         self.rect.center = tr_game.shooter.rect.center
         self.rect.y = tr_game.shooter.rect.y + 87
 
