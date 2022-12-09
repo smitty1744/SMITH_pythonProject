@@ -14,13 +14,11 @@ class Shooter:
         self.jump    = False
         self.jump_itr = 0
 
-
         res_image_a = pygame.transform.scale(self.shooter, (150, 150))
         res_rect_a = res_image_a.get_rect(center=self.rect_a.center)
         self.shooter = res_image_a
         self.rect_a = res_rect_a
 
-        # start healthy
         self.image = self.shooter
         self.image = pygame.transform.scale(self.image, (150, 150))
         self.rect = self.image.get_rect()
@@ -30,18 +28,16 @@ class Shooter:
         self.x = int(self.rect.x)
         self.y = int(self.rect.y)
 
-
-        # Moving variables.
         self.moving_right = False
         self.moving_left  = False
         self.moving_up    = False
         self.moving_down  = False
 
     def update(self):
-        self.x -= self.settings.shooter_speed * .3
+        if self.x >= 0:
+            self.x -= self.settings.shooter_speed * .3
         if self.moving_right:
             self.x += self.settings.shooter_speed # * self.settings.boy_direction)
-
 
         # Jump sequence (go up 10px and come back down 10px).
         num_itr = 100

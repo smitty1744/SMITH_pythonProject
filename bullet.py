@@ -1,6 +1,5 @@
 import pygame
 from pygame.sprite import Sprite
-from settings import Settings
 
 
 class Bullet(Sprite):
@@ -8,7 +7,7 @@ class Bullet(Sprite):
     def __init__(self, tr_game):
         super().__init__()
         self.screen = tr_game.screen
-        self.settings = tr_game.settings   # tr_game.screen
+        self.settings = tr_game.settings
         self.color = self.settings.bullet_color
 
         self.rect = pygame.Rect(0, 0, self.settings.bullet_width,
@@ -20,7 +19,6 @@ class Bullet(Sprite):
         self.x = float(self.rect.x)
 
     def update(self):
-        """Move the bullet up the screen."""
         # Update the decimal position of the bullet.
         self.x += self.settings.bullet_speed
         # Update the rect position.

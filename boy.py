@@ -19,13 +19,11 @@ class Boy(Sprite):
         self.jump    = False
         self.jump_itr = 0
 
-
         res_image_b = pygame.transform.scale(self.boy, (80, 80))
         res_rect_b = res_image_b.get_rect(center=self.rect_b.center)
         self.boy = res_image_b
         self.rect_b = res_rect_b
 
-        # start healthy
         self.image = self.healthy_image
         self.image = pygame.transform.scale(self.image, (80, 80))
         self.rect = self.image.get_rect()
@@ -35,24 +33,20 @@ class Boy(Sprite):
         self.x = int(self.rect.x)
         self.y = int(self.rect.y)
 
-
-        # Moving variables.
         self.moving_right = False
         self.moving_left  = False
         self.moving_up    = False
         self.moving_down  = False
 
     def update(self):
-        """Move the boy steadily to the right."""
-        self.x -= self.settings.boy_speed * .3
+        if self.x >= 200:
+            self.x -= self.settings.boy_speed * .3
 
         if self.moving_right:
-            #cprint('Boy am moving right.')
-            self.x += self.settings.boy_speed # * self.settings.boy_direction)
+            self.x += self.settings.boy_speed
 
         self.rect.x = self.x
 
-        # Jump sequence (go up 10px and come back down 10px).
         num_itr = 100
         if self.jump:
             if self.jump_itr < num_itr:
@@ -78,9 +72,6 @@ class Boy(Sprite):
         self.rect.y = self.y
 
     def blitme(self):
-
-        # self.health = 20
-        # self.image = self.healthy_image
         if self.health < 50:
             self.image = self.light_damage_image
         if self.health < 0:
